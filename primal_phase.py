@@ -16,3 +16,4 @@ def primal_phase(flow, kilter, max_kilter, maxflow, p, q, path_list, upper, lowe
             else:
                 flow[b][a] = flow[b][a] - min(max_kilter, maxflow)
                 kilter[b][a] = calculate_kilter_number(flow, upper, lower, b, a, reduced_cost[b][a])
+                

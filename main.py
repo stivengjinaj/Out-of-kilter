@@ -1,15 +1,14 @@
-import networkx as nx
 import numpy as np
-from matplotlib import pyplot as plt
 
-import creategraph
+from create_graph import create_graph
 from dual_phase import dual_phase
 from primal_phase import primal_phase
 from update_graph import update_graph
 from calculate_kilter_number import calculate_kilter_number
-from dfs import dfs
+from depth_first_search import depth_first_search
+from plot_graph import plot_graph
 
-values = creategraph.creategraph()
+values = create_graph()
 
 cost = values[0]
 upper = values[1]
@@ -20,6 +19,7 @@ visited = np.zeros(len(upper))
 graph = np.zeros_like(upper)
 nodes = upper.shape[0]
 flow = np.zeros((nodes, nodes))
+visual_graph = values[3]
 
 original = np.ones((nodes, nodes))
 
@@ -58,8 +58,8 @@ while np.sum(np.sum(kilter)) != 0:
     #  [0. 0. 0. 0. 0. 0.]
     #  [0. 0. 0. 0. 0. 0.]
     #  [0. 0. 0. 0. 0. 0.]]
-    #   The array will be flattened in the following way: 0 0 0 0 0 0 5 0 0 0 0 0......
-    #   5 is in the 6-th position
+    #  The array will be flattened in the following way: 0 0 0 0 0 0 5 0 0 0 0 0......
+    #  5 is in the 6-th position
     max_kilter_index = np.argmax(kilter)
 
     # Retrieve p and q from the index of the max kilter number
@@ -72,22 +72,25 @@ while np.sum(np.sum(kilter)) != 0:
 
     # Using Depth-First-Search algorithm, we find a path in the graph and
     # the maximum flow passing through that path
-    maxflow, path_list = dfs(graph, q, p, 1000, [q], visited)
+    maxflow, path_list = depth_first_search(graph, q, p, 1000, [q], visited)
 
-    # PRIMAL PHASE
     # If p is in the path we found using DFS, we enter the primal phase,
     # otherwise the dual phase
+    # PRIMAL PHASE
     if np.sum(path_list == p) == 1:
         primal_phase(flow, kilter, max_kilter, maxflow, p, q, path_list, upper, lower, reduced_cost, original)
     # DUAL PHASE
     else:
         dual_phase(flow, kilter, upper, lower, reduced_cost, nodes, visited)
 
-    print("Iteration ", iterations, "Flow: \n", flow)
-    print("Reduced Costs: \n", reduced_cost)
+    print("Iteration:", iterations)
+    print("Flow: \n\n", flow, "\n")
+    print("Reduced Costs: \n\n", reduced_cost, "\n")
 
-print("FINAL FLOW: \n", flow)
-print("FINAL REDUCED COSTS\n", reduced_cost)
+plot_graph(visual_graph)
+print("\n-------------- ALGORITHM COMPLETED. SOLUTION FOUND --------------\n")
+print("FINAL FLOW: \n\n", flow, "\n")
+print("FINAL REDUCED COSTS\n\n", reduced_cost, "\n")
 print("\n")
 print("ASSOCIATED COST: ", np.sum(cost * flow))
 print("TOTAL ITERATIONS: ", iterations)

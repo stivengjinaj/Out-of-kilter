@@ -1,19 +1,19 @@
-def calculate_kilter_number(flow, u, l, i, j, zc):
-    if zc < 0 or (zc == 0 and flow[i][j] < l[i][j]):
-        val = abs(flow[i][j] - l[i][j])
-    elif zc > 0 or (zc == 0 and flow[i][j] > u[i][j]):
-        val = abs(flow[i][j] - u[i][j])
+def calculate_kilter_number(flow, upper, lower, i, j, reduced_cost):
+    if reduced_cost < 0 or (reduced_cost == 0 and flow[i][j] < lower[i][j]):
+        val = abs(flow[i][j] - lower[i][j])
+    elif reduced_cost > 0 or (reduced_cost == 0 and flow[i][j] > upper[i][j]):
+        val = abs(flow[i][j] - upper[i][j])
     else:
         val = 0
 
-    if zc < 0:
-        val2 = abs(flow[i][j] - l[i][j])
-    elif zc > 0:
-        val2 = abs(flow[i][j] - u[i][j])
-    elif zc == 0 and flow[i][j] > u[i][j]:
-        val2 = abs(flow[i][j] - u[i][j])
-    elif zc == 0 and flow[i][j] < l[i][j]:
-        val2 = abs(flow[i][j] - l[i][j])
+    if reduced_cost < 0:
+        val2 = abs(flow[i][j] - lower[i][j])
+    elif reduced_cost > 0:
+        val2 = abs(flow[i][j] - upper[i][j])
+    elif reduced_cost == 0 and flow[i][j] > upper[i][j]:
+        val2 = abs(flow[i][j] - upper[i][j])
+    elif reduced_cost == 0 and flow[i][j] < lower[i][j]:
+        val2 = abs(flow[i][j] - lower[i][j])
     else:
         val2 = 0
 
