@@ -3,6 +3,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 import creategraph
+from dual_phase import dual_phase
+from primal_phase import primal_phase
 from update_graph import update_graph
 from calculate_kilter_number import calculate_kilter_number
 from dfs import dfs
@@ -74,46 +76,18 @@ while np.sum(np.sum(kilter)) != 0:
 
     # PRIMAL PHASE
     # If p is in the path we found using DFS, we enter the primal phase,
-    # otherwise in the dual phase
+    # otherwise the dual phase
     if np.sum(path_list == p) == 1:
-        flow[p][q] = flow[p][q] + min(max_kilter, maxflow)
-        kilter[p][q] = calculate_kilter_number(flow, upper, lower, p, q, reduced_cost[p][q])
-        for i in range(len(path_list) - 1):
-            a = path_list[i]
-            b = path_list[i + 1]
-            if original[a][b] == 1:
-                flow[a][b] = flow[a][b] + min(max_kilter, maxflow)
-                kilter[a][b] = calculate_kilter_number(flow, upper, lower, a, b, reduced_cost[a][b])
-            else:
-                flow[b][a] = flow[b][a] - min(max_kilter, maxflow)
-                kilter[b][a] = calculate_kilter_number(flow, upper, lower, b, a, reduced_cost[b][a])
+        primal_phase(flow, kilter, max_kilter, maxflow, p, q, path_list, upper, lower, reduced_cost, original)
     # DUAL PHASE
     else:
-        Xlist = np.where(visited == 1)[0]
-        theta_1 = 99999
-        theta_2 = 99999
-        for i in range(nodes):
-            for j in range(nodes):
-                if i in Xlist and j not in Xlist and reduced_cost[i][j] < 0 and flow[i][j] <= upper[i][j]:
-                    theta_1 = min(theta_1, -reduced_cost[i][j])
-                elif i not in Xlist and j in Xlist and reduced_cost[i][j] > 0 and flow[i][j] >= lower[i][j]:
-                    theta_2 = min(theta_2, reduced_cost[i][j])
-        if theta_1 == 99999:
-            print("No feasible solution to primal problem")
-            break
-        else:
-            theta = min(theta_1, theta_2)
-            for i in range(nodes):
-                for j in range(nodes):
-                    if i in Xlist and j not in Xlist:
-                        reduced_cost[i][j] += theta
-                        kilter[i][j] = calculate_kilter_number(flow, upper, lower, i, j, reduced_cost[i][j])
-                    elif i not in Xlist and j in Xlist:
-                        reduced_cost[i][j] -= theta
-                        kilter[i][j] = calculate_kilter_number(flow, upper, lower, i, j, reduced_cost[i][j])
+        dual_phase(flow, kilter, upper, lower, reduced_cost, nodes, visited)
 
-    print("FLOW: ", flow)
-    print("Reduced Costs", reduced_cost)
-    cost_associate = np.sum(cost * flow)
-    print("Associated Costs: ", str(cost_associate))
-    print("Number of Iterations: " + str(iterations))
+    print("Iteration ", iterations, "Flow: \n", flow)
+    print("Reduced Costs: \n", reduced_cost)
+
+print("FINAL FLOW: \n", flow)
+print("FINAL REDUCED COSTS\n", reduced_cost)
+print("\n")
+print("ASSOCIATED COST: ", np.sum(cost * flow))
+print("TOTAL ITERATIONS: ", iterations)
