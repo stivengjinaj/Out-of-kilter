@@ -7,6 +7,7 @@ from update_graph import update_graph
 from calculate_kilter_number import calculate_kilter_number
 from depth_first_search import depth_first_search
 from plot_graph import plot_graph
+from update_plot import update_plot
 
 values = create_graph()
 
@@ -20,7 +21,7 @@ graph = np.zeros_like(upper)
 nodes = upper.shape[0]
 flow = np.zeros((nodes, nodes))
 visual_graph = values[3]
-
+plot_graph(visual_graph, "INITIAL GRAPH (capacity, cost)\n", "")
 original = np.ones((nodes, nodes))
 
 for i in range(nodes):
@@ -87,10 +88,16 @@ while np.sum(np.sum(kilter)) != 0:
     print("Flow: \n\n", flow, "\n")
     print("Reduced Costs: \n\n", reduced_cost, "\n")
 
-plot_graph(visual_graph)
+    # Uncomment to see all steps plotted
+    # iteration_graph = update_plot(flow)
+    # plot_graph(iteration_graph, "ITERATION: " + str(iterations) + " GRAPH (capacity, flow)\n", "Associated cost: " + str(np.sum(cost * flow)))
+
 print("\n-------------- ALGORITHM COMPLETED. SOLUTION FOUND --------------\n")
 print("FINAL FLOW: \n\n", flow, "\n")
 print("FINAL REDUCED COSTS\n\n", reduced_cost, "\n")
 print("\n")
 print("ASSOCIATED COST: ", np.sum(cost * flow))
 print("TOTAL ITERATIONS: ", iterations)
+
+final_graph = update_plot(flow)
+plot_graph(final_graph, "FINAL GRAPH (capacity, flow)\n", "Associated cost: " + str(np.sum(cost * flow)))

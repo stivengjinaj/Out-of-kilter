@@ -1,6 +1,8 @@
 import numpy as np
 import networkx as nx
 
+from update_plot import update_plot
+
 
 def create_graph():
     with open("graph2.txt", 'r') as file:
@@ -15,11 +17,10 @@ def create_graph():
 
     for line in lines[1:]:
         source, destination, lb, ub, cost = map(int, line.strip().split())
-        print("DATA: ", source, " ", destination, " ", lb, " ", ub)
         if not visual_graph.has_node(source):
             visual_graph.add_node(source)
         if source != num_nodes:
-            visual_graph.add_edge(source, destination, upper=ub, cost=cost)
+            visual_graph.add_edge(source, destination, first=ub, second=cost)
 
         costs[source - 1][destination - 1] = cost
         upper[source - 1][destination - 1] = ub
