@@ -52,7 +52,7 @@ def create_graph():
         lines = file.readlines()
 ```
 
-The data in the .txt file is organized as follows: source, destination, lowerBound, upperBound, cost. When the problem doesn't provide a lowerBound (minimum capacity), assign it to 0.
+The data in the **.txt** file is organized as follows: **source, destination, lowerBound, upperBound, cost**. When the problem doesn't provide a **lowerBound** (minimum capacity), assign it to 0.
 
 **IMPORTANT:** Note that the last line of the .txt file contains an edge that goes from the last node (destination) to the first node (source). **_This edge must be always added_**. In this edge the lowerBound and upperBound are equal to the flow starting from the source node, while the cost is 0. In the example below the data is written as follows: 6 1 4 4 0
 
