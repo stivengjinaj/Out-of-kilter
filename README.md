@@ -26,7 +26,12 @@ end
 ```
 ## Installation
 
-Required only the installation of python: https://www.python.org/downloads/
+Python required: https://www.python.org/downloads/
+
+**IMPORTANT**
+```bash
+pip install -r requirements.txt
+```
 
 
 ## Usage
