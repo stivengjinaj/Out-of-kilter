@@ -10,7 +10,7 @@ begin
   Calculate G(x) and kilter number k_{ij} for each edge (i, j);
   while G(x) contains an edge (p, q) out-of-kilter do
   begin
-    Define the cost of each edge (i, j) in G(x) like $ c′ij $ = max{0, c_{ij}^π };
+    Define the cost of each edge (i, j) in G(x) like c′ij = max{0, c_{ij}^π };
     Calculate in G(x) − {(q, p)} the minimum distances from q to all the other nodes compared to
     costs c'_{ij};
     Let P be the path if minimum cost from q to p; Update π′ = π − d;
