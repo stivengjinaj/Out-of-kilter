@@ -17,7 +17,4 @@ def calculate_kilter_number(flow, upper, lower, i, j, reduced_cost):
     else:
         val2 = 0
 
-    if val != val2:
-        print('FAIL:', val, 'vs', val2)
-
     return val
