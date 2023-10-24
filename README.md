@@ -26,9 +26,23 @@ end
 ```
 ## Installation
 
-Python required: https://www.python.org/downloads/
+Python required: https://www.python.org/downloads/ . 
+
+**WINDOWS users**
+Don't forget to add it on PATH.
 
 **IMPORTANT**
+
+If **pip** is not installed, run these commands (python required) :
+```bash
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
+python get-pip.py
+```
+
+**WINDOWS users**
+Add pip to PATH 
+
 ```bash
 pip install -r requirements.txt
 ```
