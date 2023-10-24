@@ -1,58 +1,60 @@
 # Out-of-kilter algorithm
 
-The out-of-kilter algorithm is a primal-dual algorithm. It adjusts edges working on the primal problem and the nodes working on the dual problem in order to find a feasible solution and then to optimize the problem.
+The out-of-kilter algorithm is a primal-dual algorithm. It adjusts edges working on the primal problem and the nodes working on the dual problem in order to find a feasible solution, and then to optimize the problem.
 
-## Algorithm
-
-The algorithm can be expressed in a more readable form using LaTeX-style math formatting:
-
+# Algorithm
 ```latex
-\[
-\begin{align*}
-\text{Let } \pi &= 0 \text{ and } x \text{ be a feasible flow;} \\
-\text{Calculate } G(x) \text{ and kilter number } k_{ij} \text{ for each edge } (i, j); \\
-\text{while } G(x) \text{ contains an edge } (p, q) \text{ out-of-kilter do} \\
-\begin{cases}
-\text{Define the cost of each edge } (i, j) \text{ in } G(x) \text{ as } c'_{ij} = \max\{0, c_{ij}^\pi\}; \\
-\text{Calculate in } G(x) - \{(q, p)\} \text{ the minimum distances from } q \text{ to all other nodes compared to costs } c'_{ij}; \\
-\text{Let } P \text{ be the path of minimum cost from } q \text{ to } p; \text{ Update } \pi' = \pi - d; \\
-\text{if } c'_{pq}^\pi < 0 \text{ then} \\
-\begin{cases}
-W = P \cup \{(p, q)\}; \\
-\text{Calculate } \delta = \min\{r_{ij} : (i, j) \in W\}; \\
-\text{Increment } \delta \text{ in the flow in the cycle } W; \\
-\text{Update } x, G(x), \text{reduced costs } c_{ij}^\pi, \text{ and kilter numbers } k_{ij};
-\end{cases}
-\end{cases}
-\end{cases}
-\end{align*}
-\]
-
+algorithm out-of-kilter
+begin
+  Let π = 0 and x an a feasible flow;
+  Calculate G(x) and kilter number k_{ij} for each edge (i, j);
+  while G(x) contains an edge (p, q) out-of-kilter do
+  begin
+    Define the cost of each edge (i, j) in G(x) like $ c′ij $ = max{0, c_{ij}^π };
+    Calculate in G(x) − {(q, p)} the minimum distances from q to all the other nodes compared to
+    costs c'_{ij};
+    Let P be the path if minimum cost from q to p; Update π′ = π − d;
+    if c_pq{π}′ < 0 then
+      W = P ∪ {(p, q)};
+      Calculate δ = min{rij : (i, j) ∈ W};
+      Increment of δ unity the flow in the cycle W;
+      Update x, G(x), reduced costs c_{ij}^π and kilter numbers k_ij;
+    end if
+  end
+end
 ```
-
-
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Required only the installation of python: https://www.python.org/downloads/
 
-```bash
-pip install foobar
-```
 
 ## Usage
 
-```python
-import foobar
+If the program is run from PyCharm or any other IDE, you have to run the main file, otherwise just use this terminal command (assuming Python is installed)
 
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```bash
+python3 main.py
 ```
+or
+```bash
+python main.py
+```
+
+## Instructions
+
+The program starts by taking a .txt file that contains the information about the graph to be solved.
+Be careful to input the data the correct way in the .txt file. There are 2 .txt files in the project: graph.txt and graph2.txt. In the current configuration, the algorithm solves the graph in graph2.txt file. To change the graph file just change the input file name in file create_graph.py
+```python
+def create_graph():
+
+    with open("graph2.txt", 'r') as file:
+        lines = file.readlines()
+
+....................................................
+```
+
+The data in the .txt file is organized as follows: source, destination, lowerBound, upperBound, cost. When the problem doesn't provide a lowerBound (minimum capacity), assign it to 0.
+
 
 ## Contributing
 
