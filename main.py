@@ -1,13 +1,14 @@
 import numpy as np
 
-from create_graph import create_graph
+from graphs.create_graph import create_graph
 from dual_phase import dual_phase
 from primal_phase import primal_phase
-from update_graph import update_graph
-from calculate_kilter_number import calculate_kilter_number
-from depth_first_search import depth_first_search
-from plot_graph import plot_graph
-from update_plot import update_plot
+from graphs.update_graph import update_graph
+from utils.calculate_kilter_number import calculate_kilter_number
+from utils.depth_first_search import depth_first_search
+from graphs.plot_graph import plot_graph
+from graphs.update_plot import update_plot
+
 
 values = create_graph()
 
@@ -21,7 +22,6 @@ graph = np.zeros_like(upper)
 nodes = upper.shape[0]
 flow = np.zeros((nodes, nodes))
 visual_graph = values[3]
-plot_graph(visual_graph, "INITIAL GRAPH (capacity, cost)\n", "")
 original = np.ones((nodes, nodes))
 
 for i in range(nodes):
@@ -99,5 +99,6 @@ print("\n")
 print("ASSOCIATED COST: ", np.sum(cost * flow))
 print("TOTAL ITERATIONS: ", iterations)
 
+plot_graph(visual_graph, "INITIAL GRAPH (capacity, cost)\n", "")
 final_graph = update_plot(flow)
 plot_graph(final_graph, "FINAL GRAPH (capacity, flow)\n", "Associated cost: " + str(np.sum(cost * flow)))

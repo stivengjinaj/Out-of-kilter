@@ -9,8 +9,8 @@ def depth_first_search(graph, source, destination, flow, path, visited):
                 pathMax.append(i)
                 flowMax = min(flow, graph[source, i])
             else:
-                f, pa = depth_first_search(graph, i, destination, min(flow, graph[source, i]), path + [i], visited)
-                if f > flowMax:
-                    flowMax = f
-                    pathMax = pa
+                new_flow, new_path = depth_first_search(graph, i, destination, min(flow, graph[source, i]), path + [i], visited)
+                if new_flow > flowMax:
+                    flowMax = new_flow
+                    pathMax = new_path
     return flowMax, pathMax
