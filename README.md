@@ -3,6 +3,7 @@
 The out-of-kilter algorithm is a primal-dual algorithm. It adjusts edges working on the primal problem and the nodes working on the dual problem in order to find a feasible solution, and then to optimize the problem.
 
 # Algorithm
+The mathematical procedure followed by this algorithm is the same as the one in the following video: https://www.youtube.com/watch?v=CgJhTJkDhwk&pp=ygUXb3V0IG9mIGtpbHRlciBhbGdvcml0aG0%3D
 ```latex
 algorithm out-of-kilter
 begin
