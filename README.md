@@ -3,6 +3,7 @@
 The out-of-kilter algorithm is a primal-dual algorithm. It adjusts edges working on the primal problem and the nodes working on the dual problem in order to find a feasible solution, and then to optimize the problem.
 
 # Algorithm
+The mathematical procedure followed by this algorithm is the same as the one in the following video: https://www.youtube.com/watch?v=CgJhTJkDhwk&pp=ygUXb3V0IG9mIGtpbHRlciBhbGdvcml0aG0%3D
 ```latex
 algorithm out-of-kilter
 begin
@@ -10,7 +11,7 @@ begin
   Calculate G(x) and kilter number k_{ij} for each edge (i, j);
   while G(x) contains an edge (p, q) out-of-kilter do
   begin
-    Define the cost of each edge (i, j) in G(x) like $ c′ij $ = max{0, c_{ij}^π };
+    Define the cost of each edge (i, j) in G(x) like c′ij = max{0, c_{ij}^π };
     Calculate in G(x) − {(q, p)} the minimum distances from q to all the other nodes compared to
     costs c'_{ij};
     Let P be the path if minimum cost from q to p; Update π′ = π − d;
@@ -51,7 +52,7 @@ def create_graph():
         lines = file.readlines()
 ```
 
-The data in the .txt file is organized as follows: source, destination, lowerBound, upperBound, cost. When the problem doesn't provide a lowerBound (minimum capacity), assign it to 0.
+The data in the **.txt** file is organized as follows: **source, destination, lowerBound, upperBound, cost**. When the problem doesn't provide a **lowerBound** (minimum capacity), assign it to 0.
 
 **IMPORTANT:** Note that the last line of the .txt file contains an edge that goes from the last node (destination) to the first node (source). **_This edge must be always added_**. In this edge the lowerBound and upperBound are equal to the flow starting from the source node, while the cost is 0. In the example below the data is written as follows: 6 1 4 4 0
 
