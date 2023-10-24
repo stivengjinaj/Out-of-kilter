@@ -29,6 +29,7 @@ end
 Python required: https://www.python.org/downloads/ . 
 
 **WINDOWS users**
+
 Don't forget to add it on PATH.
 
 **IMPORTANT**
@@ -41,6 +42,7 @@ python get-pip.py
 ```
 
 **WINDOWS users**
+
 Add pip to PATH 
 
 ```bash
