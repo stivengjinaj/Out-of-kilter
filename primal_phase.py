@@ -1,6 +1,6 @@
 import numpy as np
 
-from calculate_kilter_number import calculate_kilter_number
+from utils.calculate_kilter_number import calculate_kilter_number
 
 
 def primal_phase(flow, kilter, max_kilter, maxflow, p, q, path_list, upper, lower, reduced_cost, original):

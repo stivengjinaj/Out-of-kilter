@@ -1,5 +1,4 @@
 import networkx as nx
-from matplotlib import pyplot as plt
 
 
 def update_plot(flow):
@@ -16,6 +15,6 @@ def update_plot(flow):
             updated_graph.add_node(source)
 
         if source != num_nodes:
-            updated_graph.add_edge(source, destination, first=int(ub), second=int(flow[source-1][destination-1]))
+            updated_graph.add_edge(source, destination, first=int(ub), second=int(flow[source - 1][destination - 1]))
 
     return updated_graph

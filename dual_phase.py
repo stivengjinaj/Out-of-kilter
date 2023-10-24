@@ -1,6 +1,6 @@
 import numpy as np
 
-from calculate_kilter_number import calculate_kilter_number
+from utils.calculate_kilter_number import calculate_kilter_number
 
 
 def dual_phase(flow, kilter, upper, lower, reduced_cost, nodes, visited):

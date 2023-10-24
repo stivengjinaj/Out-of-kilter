@@ -59,5 +59,4 @@ def plot_graph(visual_graph, title, associated_cost):
     plt.axis("off")
     plt.title(title, fontweight='bold')
     plt.text(0.2, 1, associated_cost, fontweight='bold')
-    plt.savefig("graph.png")
     plt.show()

@@ -1,8 +1,6 @@
 import numpy as np
 import networkx as nx
 
-from update_plot import update_plot
-
 
 def create_graph():
     with open("graph2.txt", 'r') as file:
