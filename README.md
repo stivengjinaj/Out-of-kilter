@@ -42,26 +42,42 @@ python main.py
 
 ## Instructions
 
-The program starts by taking a .txt file that contains the information about the graph to be solved.
-Be careful to input the data the correct way in the .txt file. There are 2 .txt files in the project: graph.txt and graph2.txt. In the current configuration, the algorithm solves the graph in graph2.txt file. To change the graph file just change the input file name in file create_graph.py
+The program starts by taking a **_.txt_** file that contains the information about the graph to be solved.
+Be careful to input the data the correct way in the **_.txt_** file. There are 2 **_.txt_** files in the project: **graph.txt** and **graph2.txt**. In the current configuration, the algorithm solves the graph in **graph2.txt** file. To change the graph file just change the input file name in file **create_graph.py**
 ```python
 def create_graph():
 
     with open("graph2.txt", 'r') as file:
         lines = file.readlines()
-
-....................................................
 ```
 
 The data in the .txt file is organized as follows: source, destination, lowerBound, upperBound, cost. When the problem doesn't provide a lowerBound (minimum capacity), assign it to 0.
 
+**IMPORTANT:** Note that the last line of the .txt file contains an edge that goes from the last node (destination) to the first node (source). **_This edge must be always added_**. In this edge the lowerBound and upperBound are equal to the flow starting from the source node, while the cost is 0. In the example below the data is written as follows: 6 1 4 4 0
 
-## Contributing
+The graph solved in the example:
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+![Example](https://github.com/stivengjinaj/Out-of-kilter/blob/master/solved%20example.png)
 
-Please make sure to update tests as appropriate.
+When you run the program, all the iterations with kilter numbers, flows and reduced costs will be printed in terminal. 
+
+**_NOTE:_** The program plots the graphs in order to understand better the solution. If you run the program on terminal, a window containing the initial graph will open. If you close this window, you will be able to see the graph of the solution.
+
+The initial graph plotted by the program:
+
+![Initial graph](https://github.com/stivengjinaj/Out-of-kilter/blob/master/initial_graph.png)
+
+The final graph plotted by the solution of the program:
+
+![Final graph](https://github.com/stivengjinaj/Out-of-kilter/blob/master/final_graph.png)
+
+**_NOTE:_** There is a section in **main.py** that is commented. If you de-comment it you will get plot of the graph in each iteration of the algorithm until reaching the solution
+
+```python
+    # Uncomment to see all steps plotted
+    # iteration_graph = update_plot(flow)
+    # plot_graph(iteration_graph, "ITERATION: " + str(iterations) + " GRAPH (capacity, flow)\n", "Associated cost: " + str(np.sum(cost * flow)))
+```
 
 ## License
 
