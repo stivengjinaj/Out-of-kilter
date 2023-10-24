@@ -4,20 +4,29 @@ The out-of-kilter algorithm is a primal-dual algorithm. It adjusts edges working
 
 ## Algorithm
 
-The algorithm can be expressed in a more readable form using MathJax formatting:
+The algorithm can be expressed in a more readable form using LaTeX-style math formatting:
 
-```markdown
-1. Let \( \pi = 0 \) and \( x \) be a feasible flow;
-2. Calculate \( G(x) \) and kilter number \( k_{ij} \) for each edge \( (i, j) \);
-3. while \( G(x) \) contains an edge \( (p, q) \) out-of-kilter do:
-   - Define the cost of each edge \( (i, j) \) in \( G(x) \) as \( c'_{ij} = \max(0, c_{ij}^\pi) \);
-   - Calculate in \( G(x) - \{(q, p)\} \) the minimum distances from \( q \) to all other nodes compared to costs \( c'_{ij} \);
-   - Let \( P \) be the path of minimum cost from \( q \) to \( p \). Update \( \pi' = \pi - d \);
-   - if \( c'_{pq}^\pi < 0 \) then:
-     - \( W = P \cup \{(p, q)\} \);
-     - Calculate \( \delta = \min\{r_{ij} : (i, j) \in W\} \);
-     - Increment \( \delta \) in the flow in the cycle \( W \);
-     - Update \( x \), \( G(x) \), reduced costs \( c_{ij}^\pi \), and kilter numbers \( k_{ij} \).
+```latex
+\[
+\begin{align*}
+\text{Let } \pi &= 0 \text{ and } x \text{ be a feasible flow;} \\
+\text{Calculate } G(x) \text{ and kilter number } k_{ij} \text{ for each edge } (i, j); \\
+\text{while } G(x) \text{ contains an edge } (p, q) \text{ out-of-kilter do} \\
+\begin{cases}
+\text{Define the cost of each edge } (i, j) \text{ in } G(x) \text{ as } c'_{ij} = \max\{0, c_{ij}^\pi\}; \\
+\text{Calculate in } G(x) - \{(q, p)\} \text{ the minimum distances from } q \text{ to all other nodes compared to costs } c'_{ij}; \\
+\text{Let } P \text{ be the path of minimum cost from } q \text{ to } p; \text{ Update } \pi' = \pi - d; \\
+\text{if } c'_{pq}^\pi < 0 \text{ then} \\
+\begin{cases}
+W = P \cup \{(p, q)\}; \\
+\text{Calculate } \delta = \min\{r_{ij} : (i, j) \in W\}; \\
+\text{Increment } \delta \text{ in the flow in the cycle } W; \\
+\text{Update } x, G(x), \text{reduced costs } c_{ij}^\pi, \text{ and kilter numbers } k_{ij};
+\end{cases}
+\end{cases}
+\end{cases}
+\end{align*}
+\]
 
 ```
 
