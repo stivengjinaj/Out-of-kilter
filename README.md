@@ -46,6 +46,7 @@ The program starts by taking a **_.txt_** file that contains the information abo
 Be careful to input the data the correct way in the **_.txt_** file. There are 2 **_.txt_** files in the project: **graph.txt** and **graph2.txt**. In the current configuration, the algorithm solves the graph in **graph2.txt** file. To change the graph file just change the input file name in file **create_graph.py**
 ```python
 def create_graph():
+
     with open("graph2.txt", 'r') as file:
         lines = file.readlines()
 ```
